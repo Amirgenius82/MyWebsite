@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>پنل مدیریت</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Tahoma, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 60px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #38bdf8;
+            margin-bottom: 40px;
+        }
+
+        .message {
+            background: #111827;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+        }
+
+        .message h3 {
+            margin-top: 0;
+            color: #38bdf8;
+        }
+
+        .message p {
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        .back {
+            display: block;
+            width: fit-content;
+            margin: 30px auto;
+            padding: 12px 25px;
+            background: #38bdf8;
+            color: #0f172a;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>📨 پیام‌های دریافتی</h1>
+
+        {% for message in messages %}
+
+        <div class="message">
+
+            <h3>{{ message[1] }}</h3>
+
+            <p>
+                📧 {{ message[2] }}
+            </p>
+
+            <p>
+                💬 {{ message[3] }}
+            </p>
+
+        </div>
+
+        {% else %}
+
+        <div class="message">
+            <p>هنوز هیچ پیامی دریافت نشده است.</p>
+        </div>
+
+        {% endfor %}
+
+        <a class="back" href="/">
+            🏠 برگشت به سایت
+        </a>
+
+<a class="logout" href="/logout">
+    🚪 خروج از حساب
+</a>
+
+    </div>
+
+</body>
+
+</html>

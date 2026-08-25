@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>سایت من</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Tahoma, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        nav {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            background: #111827;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+.logo img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 25px;
+        }
+
+        .hero {
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 span {
+            color: #38bdf8;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #cbd5e1;
+            max-width: 600px;
+            line-height: 2;
+        }
+
+        .button {
+            margin-top: 25px;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 10px;
+            background: #38bdf8;
+            color: #0f172a;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+
+        .about {
+            text-align: center;
+            padding: 80px 20px;
+            background: #111827;
+        }
+
+        .about h2 {
+            font-size: 35px;
+        }
+
+        .about p {
+            color: #cbd5e1;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+</div>
+
+        <div>
+            <a href="/">خانه</a>
+            <a href="/about">درباره من</a>
+            <a href="/contact">تماس با من</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+
+        <h1>
+            سلام، من <span>برنامه‌نویسم</span> 👋
+        </h1>
+
+        <p>
+            این اولین سایت منه که با Python و Flask ساختم.
+            اینجا قراره کم‌کم چیزهای خفن‌تری بسازیم!
+        </p>
+
+        <button class="button" onclick="welcome()">
+            شروع کنیم 🚀
+        </button>
+
+    </section>
+
+    <section class="about" id="about">
+
+        <h2>درباره سایت</h2>
+
+        <p>
+            این پروژه با Python، Flask، HTML و CSS ساخته شده است.
+        </p>
+
+    </section>
+
+    <script>
+        function welcome() {
+            alert("خوش اومدی! 🎉");
+        }
+    </script>
+
+</body>
+</html>

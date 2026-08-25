@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>تماس با من</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Tahoma, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        nav {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            background: #111827;
+        }
+
+        .logo img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+        }
+
+        nav div:last-child {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 650px;
+            margin: 70px auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 45px;
+            color: #38bdf8;
+        }
+
+        form {
+            background: #111827;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #38bdf8;
+            color: #0f172a;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #111827;
+            color: #94a3b8;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+        </div>
+
+        <div>
+            <a href="/">خانه</a>
+            <a href="/about">درباره من</a>
+            <a href="/contact">تماس با من</a>
+        </div>
+
+    </nav>
+
+
+    <div class="container">
+
+        <h1>تماس با من 📞</h1>
+
+        <form method="POST" action="/contact">
+
+            <input
+                type="text"
+                name="name"
+                placeholder="نام شما"
+                required
+            >
+
+            <input
+                type="email"
+                name="email"
+                placeholder="ایمیل شما"
+                required
+            >
+
+            <textarea
+                name="message"
+                placeholder="پیام شما"
+                required
+            ></textarea>
+
+            <button type="submit">
+                ارسال پیام 🚀
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <footer>
+        ساخته شده با ❤️ و Python
+    </footer>
+
+</body>
+
+</html>

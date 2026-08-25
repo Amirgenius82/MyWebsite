@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>درباره من</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Tahoma, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        nav {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            background: #111827;
+        }
+
+        .logo img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+        }
+
+        nav div:last-child {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 45px;
+            color: #38bdf8;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 2;
+            color: #cbd5e1;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 14px 30px;
+            background: #38bdf8;
+            color: #0f172a;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #111827;
+            color: #94a3b8;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+        </div>
+
+        <div>
+            <a href="/">خانه</a>
+            <a href="/about">درباره من</a>
+            <a href="/contact">تماس با من</a>
+        </div>
+
+    </nav>
+
+
+    <div class="content">
+
+        <h1>درباره من 👋</h1>
+
+        <p>
+            سلام! من تازه برنامه‌نویسی رو شروع کردم
+            و این اولین سایت منه که با Python و Flask ساختم.
+        </p>
+
+        <p>
+            قراره این سایت رو کم‌کم بزرگ‌تر و حرفه‌ای‌تر کنم. 🚀
+        </p>
+
+        <a class="back" href="/">
+            🏠 برگشت به صفحه اصلی
+        </a>
+
+    </div>
+
+
+    <footer>
+        ساخته شده با ❤️ و Python
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ورود مدیر</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Tahoma, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        .login-box {
+            width: 90%;
+            max-width: 400px;
+            margin: 120px auto;
+            padding: 35px;
+            background: #111827;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #38bdf8;
+            margin-bottom: 30px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #38bdf8;
+            color: #0f172a;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .error {
+            color: #f87171;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <h1>🔐 ورود مدیر</h1>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="username"
+                placeholder="نام کاربری"
+                required
+            >
+
+            <input
+                type="password"
+                name="password"
+                placeholder="رمز عبور"
+                required
+            >
+
+            <button type="submit">
+                ورود 🚀
+            </button>
+
+        </form>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
