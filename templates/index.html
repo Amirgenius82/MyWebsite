@@ -1,135 +1,834 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>سایت من</title>
+    <title>MyWebsite | توسعه‌دهنده وب</title>
+    <meta name="description" content="سایت شخصی و نمونه‌کار توسعه‌دهنده وب">
 
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
-            font-family: Tahoma, sans-serif;
-            background: #0f172a;
-            color: white;
+        html {
+            scroll-behavior: smooth;
         }
 
-        nav {
-            height: 80px;
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(0, 255, 255, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 70%, rgba(150, 0, 255, 0.10), transparent 30%),
+                #05070d;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: .25;
+            animation: floatOrb 10s ease-in-out infinite alternate;
+        }
+
+        .orb.one {
+            width: 280px;
+            height: 280px;
+            background: #00ffff;
+            top: 10%;
+            left: -80px;
+        }
+
+        .orb.two {
+            width: 330px;
+            height: 330px;
+            background: #8a2be2;
+            bottom: 5%;
+            right: -100px;
+            animation-delay: 2s;
+        }
+
+        .orb.three {
+            width: 180px;
+            height: 180px;
+            background: #0066ff;
+            top: 45%;
+            right: 35%;
+            animation-delay: 4s;
+        }
+
+        @keyframes floatOrb {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+            to {
+                transform: translate(50px, -40px) scale(1.15);
+            }
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            position: fixed;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(1150px, calc(100% - 32px));
+            min-height: 68px;
+            padding: 10px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 8%;
-            background: #111827;
+            background: rgba(8, 12, 24, .72);
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 15px 50px rgba(0,0,0,.35);
+            z-index: 1000;
         }
 
-        .logo img {
-            width: 55px;
-            height: 55px;
-            object-fit: contain;
-        }
-
-        nav div:last-child {
-            display: flex;
-            gap: 25px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 17px;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: #38bdf8;
-        }
-
-        .hero {
-            min-height: calc(100vh - 80px);
+        .brand {
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 30px;
+            gap: 12px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .brand img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .brand span {
+            color: #00ffff;
+            letter-spacing: .5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            padding: 10px 16px;
+            border-radius: 12px;
+            color: #b9c2d0;
+            transition: .25s ease;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #00ffff;
+            background: rgba(0,255,255,.08);
+            box-shadow: 0 0 20px rgba(0,255,255,.08);
+        }
+
+        .menu-btn {
+            display: none;
+            border: 1px solid rgba(0,255,255,.25);
+            background: rgba(0,255,255,.07);
+            color: #00ffff;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 23px;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+            max-width: 1150px;
+            margin: auto;
+            padding: 150px 25px 80px;
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            align-items: center;
+            gap: 60px;
         }
 
         .hero-content {
-            max-width: 750px;
+            animation: heroIn .9s ease both;
+        }
+
+        @keyframes heroIn {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 8px 14px;
+            border: 1px solid rgba(0,255,255,.20);
+            background: rgba(0,255,255,.06);
+            border-radius: 999px;
+            color: #00ffff;
+            font-size: 13px;
+            margin-bottom: 22px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff9d;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #00ff9d;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: .5;
+            }
         }
 
         .hero h1 {
-            font-size: 55px;
-            margin-bottom: 20px;
-            color: #38bdf8;
+            font-size: clamp(42px, 6vw, 76px);
+            line-height: 1.15;
+            margin-bottom: 22px;
         }
 
-        .hero p {
-            font-size: 21px;
-            line-height: 2;
-            color: #cbd5e1;
+        .hero h1 .cyan {
+            color: #00ffff;
+            text-shadow: 0 0 30px rgba(0,255,255,.25);
         }
 
-        .buttons {
-            margin-top: 35px;
+        .hero h1 .purple {
+            color: #b56cff;
+            text-shadow: 0 0 30px rgba(181,108,255,.25);
+        }
+
+        .hero-description {
+            max-width: 650px;
+            color: #aab4c5;
+            font-size: 17px;
+            margin-bottom: 32px;
+        }
+
+        .typing {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        .cursor {
+            color: #00ffff;
+            animation: blink .7s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 13px;
+            flex-wrap: wrap;
         }
 
         .btn {
-            display: inline-block;
-            padding: 14px 28px;
-            margin: 8px;
-            border-radius: 10px;
-            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px;
+            padding: 0 23px;
+            border-radius: 14px;
             font-weight: bold;
-            transition: 0.3s;
+            transition: .3s ease;
+            border: 1px solid transparent;
         }
 
         .btn-primary {
-            background: #38bdf8;
-            color: #0f172a;
+            background: linear-gradient(135deg, #00ffff, #008cff);
+            color: #031015;
+            box-shadow: 0 10px 35px rgba(0,255,255,.18);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 45px rgba(0,255,255,.30);
         }
 
         .btn-secondary {
-            border: 2px solid #38bdf8;
-            color: #38bdf8;
+            border-color: rgba(255,255,255,.12);
+            background: rgba(255,255,255,.04);
+            color: #fff;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
+        .btn-secondary:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0,255,255,.35);
+            color: #00ffff;
         }
+
+        /* =========================
+           HERO CARD
+        ========================= */
+
+        .hero-card {
+            position: relative;
+            min-height: 440px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .code-card {
+            width: min(420px, 100%);
+            padding: 24px;
+            border: 1px solid rgba(255,255,255,.11);
+            background: linear-gradient(
+                145deg,
+                rgba(17,24,42,.88),
+                rgba(8,12,23,.72)
+            );
+            border-radius: 26px;
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.45),
+                0 0 50px rgba(0,255,255,.06);
+            transform: rotate(2deg);
+            animation: cardFloat 5s ease-in-out infinite alternate;
+        }
+
+        @keyframes cardFloat {
+            from { transform: rotate(2deg) translateY(0); }
+            to { transform: rotate(-1deg) translateY(-15px); }
+        }
+
+        .window-bar {
+            display: flex;
+            gap: 7px;
+            padding-bottom: 20px;
+        }
+
+        .window-bar span {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.25);
+        }
+
+        .code {
+            font-family: Consolas, monospace;
+            direction: ltr;
+            text-align: left;
+            color: #b8c5d9;
+            font-size: 14px;
+            line-height: 2.1;
+        }
+
+        .code .key {
+            color: #00ffff;
+        }
+
+        .code .value {
+            color: #c68cff;
+        }
+
+        .code .green {
+            color: #65ffb4;
+        }
+
+        .floating-tag {
+            position: absolute;
+            padding: 10px 15px;
+            border: 1px solid rgba(0,255,255,.18);
+            background: rgba(8,15,28,.85);
+            backdrop-filter: blur(12px);
+            border-radius: 13px;
+            color: #dce7f5;
+            font-size: 12px;
+            box-shadow: 0 12px 35px rgba(0,0,0,.35);
+        }
+
+        .tag-one {
+            top: 35px;
+            right: -10px;
+            animation: tagFloat 4s infinite ease-in-out;
+        }
+
+        .tag-two {
+            bottom: 45px;
+            left: -5px;
+            animation: tagFloat 4s 1s infinite ease-in-out;
+        }
+
+        @keyframes tagFloat {
+            50% { transform: translateY(-10px); }
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        section {
+            scroll-margin-top: 110px;
+        }
+
+        .section {
+            max-width: 1150px;
+            margin: auto;
+            padding: 100px 25px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-label {
+            color: #00ffff;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(30px, 4vw, 46px);
+            margin-bottom: 12px;
+        }
+
+        .section-heading p {
+            color: #8995a8;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .glass-card {
+            padding: 30px;
+            border-radius: 22px;
+            background: rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.08);
+            transition: .3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(0,255,255,.22);
+            box-shadow: 0 20px 55px rgba(0,0,0,.25);
+        }
+
+        .glass-card h3 {
+            margin-bottom: 12px;
+            font-size: 21px;
+        }
+
+        .glass-card p {
+            color: #9ba6b8;
+        }
+
+        /* =========================
+           SKILLS
+        ========================= */
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .skill {
+            text-align: center;
+            padding: 27px 18px;
+        }
+
+        .skill-icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 17px;
+            background: rgba(0,255,255,.07);
+            border: 1px solid rgba(0,255,255,.13);
+            font-size: 27px;
+        }
+
+        .skill h3 {
+            font-size: 17px;
+            margin-bottom: 14px;
+        }
+
+        .progress {
+            height: 6px;
+            background: rgba(255,255,255,.08);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress span {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #00ffff, #9b5cff);
+            border-radius: inherit;
+            transition: width 1.5s ease;
+        }
+
+        .skill small {
+            display: block;
+            margin-top: 9px;
+            color: #778397;
+        }
+
+        /* =========================
+           PROJECTS
+        ========================= */
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .project {
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .project-top {
+            height: 175px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at center, rgba(0,255,255,.12), transparent 55%),
+                rgba(0,255,255,.025);
+            border-bottom: 1px solid rgba(255,255,255,.07);
+            font-size: 50px;
+        }
+
+        .project-body {
+            padding: 24px;
+        }
+
+        .project-body h3 {
+            margin-bottom: 9px;
+        }
+
+        .project-body p {
+            color: #8995a8;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .project-link {
+            color: #00ffff;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 28px 15px;
+        }
+
+        .stat-number {
+            display: block;
+            color: #00ffff;
+            font-size: 38px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .stat span:last-child {
+            color: #8d98aa;
+            font-size: 14px;
+        }
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 75px 30px;
+            border-radius: 30px;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(0,255,255,.13), transparent 45%),
+                rgba(255,255,255,.035);
+            border: 1px solid rgba(0,255,255,.12);
+        }
+
+        .cta h2 {
+            font-size: clamp(30px, 4vw, 48px);
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #9aa6b8;
+            max-width: 650px;
+            margin: 0 auto 28px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
 
         footer {
+            border-top: 1px solid rgba(255,255,255,.07);
+            margin-top: 70px;
+            padding: 35px 20px;
             text-align: center;
-            padding: 20px;
-            background: #111827;
-            color: #94a3b8;
+            color: #687488;
+            font-size: 13px;
         }
 
-        @media (max-width: 600px) {
+        footer strong {
+            color: #00ffff;
+        }
 
-            nav {
-                padding: 0 20px;
+        /* =========================
+           SCROLL TOP
+        ========================= */
+
+        .scroll-top {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            width: 45px;
+            height: 45px;
+            border: 1px solid rgba(0,255,255,.20);
+            border-radius: 13px;
+            background: rgba(7,13,25,.85);
+            color: #00ffff;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: .3s ease;
+            z-index: 900;
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 135px;
             }
 
-            nav div:last-child {
-                gap: 10px;
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
             }
 
-            nav a {
-                font-size: 13px;
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-card {
+                min-height: 380px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .navbar {
+                top: 10px;
+                width: calc(100% - 20px);
+                border-radius: 17px;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: calc(100% + 8px);
+                left: 0;
+                right: 0;
+                padding: 10px;
+                flex-direction: column;
+                align-items: stretch;
+                background: rgba(7,12,24,.96);
+                border: 1px solid rgba(255,255,255,.09);
+                border-radius: 17px;
+                backdrop-filter: blur(20px);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-8px);
+                transition: .25s ease;
+            }
+
+            .nav-links.show {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .nav-links a {
+                text-align: center;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .section {
+                padding: 75px 18px;
             }
 
             .hero h1 {
-                font-size: 38px;
+                font-size: 43px;
             }
 
-            .hero p {
-                font-size: 17px;
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .code-card {
+                padding: 18px;
+                border-radius: 20px;
+            }
+
+            .floating-tag {
+                display: none;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .skill {
+                padding: 22px 12px;
+            }
+
+            .stats {
+                gap: 12px;
+            }
+
+            .stat-number {
+                font-size: 31px;
+            }
+
+            .cta {
+                padding: 55px 20px;
+                border-radius: 22px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .brand span {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 37px;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
@@ -137,53 +836,600 @@
 
 <body>
 
-    <nav>
+    <div class="background">
+        <div class="orb one"></div>
+        <div class="orb two"></div>
+        <div class="orb three"></div>
+    </div>
 
-        <div class="logo">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <a href="{{ url_for('home') }}" class="brand">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="MyWebsite">
+            <span>MyWebsite</span>
+        </a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="{{ url_for('home') }}" class="active">خانه</a>
+            <a href="{{ url_for('about') }}">درباره من</a>
+            <a href="#skills">مهارت‌ها</a>
+            <a href="#projects">پروژه‌ها</a>
+            <a href="{{ url_for('contact') }}">تماس</a>
+            <a href="{{ url_for('login') }}">ورود مدیر</a>
         </div>
 
-        <div>
-            <a href="/">خانه</a>
-            <a href="/about">درباره من</a>
-            <a href="/contact">تماس با من</a>
-        </div>
+        <button class="menu-btn" id="menuBtn" aria-label="باز کردن منو">
+            ☰
+        </button>
 
     </nav>
 
+    <!-- HERO -->
+    <main>
 
-    <section class="hero">
+        <section class="hero">
 
-        <div class="hero-content">
+            <div class="hero-content">
 
-            <h1>به سایت من خوش آمدید 🚀</h1>
+                <div class="badge">
+                    <span class="status-dot"></span>
+                    آماده برای پروژه‌های جدید
+                </div>
 
-            <p>
-                این سایت رو با Python و Flask ساختم
-                و قراره هر روز حرفه‌ای‌ترش کنم.
-            </p>
+                <h1>
+                    سلام، من یک
+                    <span class="cyan">توسعه‌دهنده</span>
+                    <br>
+                    <span class="purple">وب</span> هستم.
+                </h1>
 
-            <div class="buttons">
+                <p class="hero-description">
+                    وب‌سایت‌های مدرن، سریع و حرفه‌ای می‌سازم.
+                    تمرکز من روی طراحی زیبا، تجربه کاربری خوب و
+                    کدنویسی تمیز است.
+                    <br>
+                    تخصص من:
+                    <span class="typing" id="typing"></span>
+                    <span class="cursor">|</span>
+                </p>
 
-                <a class="btn btn-primary" href="/about">
-                    درباره من 👤
-                </a>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        مشاهده پروژه‌ها
+                    </a>
 
-                <a class="btn btn-secondary" href="/contact">
-                    تماس با من 📞
+                    <a href="{{ url_for('contact') }}" class="btn btn-secondary">
+                        شروع همکاری
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="hero-card">
+
+                <div class="code-card">
+
+                    <div class="window-bar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="code">
+                        <div>
+                            <span class="key">const</span>
+                            developer = {
+                        </div>
+
+                        <div>
+                            &nbsp;&nbsp;name:
+                            <span class="value">'MyWebsite'</span>,
+                        </div>
+
+                        <div>
+                            &nbsp;&nbsp;role:
+                            <span class="value">'Web Developer'</span>,
+                        </div>
+
+                        <div>
+                            &nbsp;&nbsp;skills: [
+                        </div>
+
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="green">'HTML'</span>,
+                        </div>
+
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="green">'CSS'</span>,
+                        </div>
+
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="green">'JavaScript'</span>,
+                        </div>
+
+                        <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="green">'Python'</span>
+                        </div>
+
+                        <div>
+                            &nbsp;&nbsp;],
+                        </div>
+
+                        <div>
+                            &nbsp;&nbsp;passion:
+                            <span class="value">true</span>
+                        </div>
+
+                        <div>
+                            };
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="floating-tag tag-one">
+                    ⚡ Fast & Modern
+                </div>
+
+                <div class="floating-tag tag-two">
+                    🚀 Clean Code
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ABOUT -->
+        <section class="section" id="about">
+
+            <div class="section-heading">
+                <div class="section-label">ABOUT ME</div>
+                <h2>درباره من</h2>
+                <p>
+                    ترکیب خلاقیت، طراحی و برنامه‌نویسی برای ساخت تجربه‌های
+                    دیجیتال بهتر.
+                </p>
+            </div>
+
+            <div class="about-grid">
+
+                <div class="glass-card">
+                    <h3>👨‍💻 توسعه‌دهنده وب</h3>
+                    <p>
+                        علاقه‌مند به ساخت وب‌سایت‌هایی هستم که هم ظاهر جذابی
+                        داشته باشند و هم سریع، کاربردی و قابل اعتماد باشند.
+                    </p>
+                </div>
+
+                <div class="glass-card">
+                    <h3>🎯 هدف من</h3>
+                    <p>
+                        هدف این پروژه ساخت یک نمونه‌کار واقعی و حرفه‌ای است
+                        که مهارت‌های طراحی، Frontend و Backend را در کنار هم
+                        نشان دهد.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- SKILLS -->
+        <section class="section" id="skills">
+
+            <div class="section-heading">
+                <div class="section-label">MY SKILLS</div>
+                <h2>مهارت‌های من</h2>
+                <p>
+                    ابزارهایی که برای ساخت پروژه‌های مدرن استفاده می‌کنم.
+                </p>
+            </div>
+
+            <div class="skills-grid">
+
+                <div class="glass-card skill">
+                    <div class="skill-icon">🌐</div>
+                    <h3>HTML</h3>
+                    <div class="progress">
+                        <span data-width="95%"></span>
+                    </div>
+                    <small>95%</small>
+                </div>
+
+                <div class="glass-card skill">
+                    <div class="skill-icon">🎨</div>
+                    <h3>CSS</h3>
+                    <div class="progress">
+                        <span data-width="90%"></span>
+                    </div>
+                    <small>90%</small>
+                </div>
+
+                <div class="glass-card skill">
+                    <div class="skill-icon">⚡</div>
+                    <h3>JavaScript</h3>
+                    <div class="progress">
+                        <span data-width="82%"></span>
+                    </div>
+                    <small>82%</small>
+                </div>
+
+                <div class="glass-card skill">
+                    <div class="skill-icon">🐍</div>
+                    <h3>Python / Flask</h3>
+                    <div class="progress">
+                        <span data-width="88%"></span>
+                    </div>
+                    <small>88%</small>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- PROJECTS -->
+        <section class="section" id="projects">
+
+            <div class="section-heading">
+                <div class="section-label">MY WORK</div>
+                <h2>پروژه‌ها</h2>
+                <p>
+                    چند نمونه از کارهایی که می‌توانم طراحی و توسعه بدهم.
+                </p>
+            </div>
+
+            <div class="projects-grid">
+
+                <div class="glass-card project">
+                    <div class="project-top">💻</div>
+
+                    <div class="project-body">
+                        <h3>Portfolio Website</h3>
+
+                        <p>
+                            یک سایت شخصی مدرن برای معرفی مهارت‌ها،
+                            پروژه‌ها و اطلاعات تماس.
+                        </p>
+
+                        <a href="{{ url_for('home') }}" class="project-link">
+                            مشاهده پروژه ←
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass-card project">
+                    <div class="project-top">📩</div>
+
+                    <div class="project-body">
+                        <h3>Contact System</h3>
+
+                        <p>
+                            سیستم ارسال و ذخیره پیام با Flask و SQLite
+                            به همراه پنل مدیریت.
+                        </p>
+
+                        <a href="{{ url_for('contact') }}" class="project-link">
+                            ارسال پیام ←
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass-card project">
+                    <div class="project-top">🛠️</div>
+
+                    <div class="project-body">
+                        <h3>Admin Dashboard</h3>
+
+                        <p>
+                            پنل مدیریت برای مشاهده و مدیریت پیام‌های
+                            ارسال‌شده توسط کاربران.
+                        </p>
+
+                        <a href="{{ url_for('login') }}" class="project-link">
+                            ورود به پنل ←
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- STATS -->
+        <section class="section">
+
+            <div class="section-heading">
+                <div class="section-label">STATISTICS</div>
+                <h2>چرا این سایت؟</h2>
+            </div>
+
+            <div class="stats">
+
+                <div class="glass-card stat">
+                    <span class="stat-number" data-count="100">0</span>
+                    <span>درصد Responsive</span>
+                </div>
+
+                <div class="glass-card stat">
+                    <span class="stat-number" data-count="24">0</span>
+                    <span>ساعت پشتیبانی</span>
+                </div>
+
+                <div class="glass-card stat">
+                    <span class="stat-number" data-count="3">0</span>
+                    <span>بخش اصلی پروژه</span>
+                </div>
+
+                <div class="glass-card stat">
+                    <span class="stat-number" data-count="1">0</span>
+                    <span>هدف؛ کیفیت</span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CTA -->
+        <section class="section">
+
+            <div class="cta">
+
+                <h2>ایده‌ای برای ساختن داری؟ 🚀</h2>
+
+                <p>
+                    اگر پروژه‌ای داری یا می‌خواهی درباره همکاری صحبت کنیم،
+                    از طریق صفحه تماس با من پیام بفرست.
+                </p>
+
+                <a href="{{ url_for('contact') }}" class="btn btn-primary">
+                    با من تماس بگیر
                 </a>
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
+    </main>
 
-
+    <!-- FOOTER -->
     <footer>
-        ساخته شده با ❤️ و Python
+        © 2026 <strong>MyWebsite</strong> — ساخته شده با ❤️ و کدنویسی
     </footer>
 
-</body>
+    <!-- SCROLL TOP -->
+    <button class="scroll-top" id="scrollTop" aria-label="بازگشت به بالا">
+        ↑
+    </button>
 
+    <script>
+        /* =========================
+           MOBILE MENU
+        ========================= */
+
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+
+        menuBtn.addEventListener("click", function () {
+            navLinks.classList.toggle("show");
+        });
+
+        document.querySelectorAll(".nav-links a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                navLinks.classList.remove("show");
+            });
+        });
+
+        /* =========================
+           TYPING EFFECT
+        ========================= */
+
+        const typingElement = document.getElementById("typing");
+
+        const words = [
+            "طراحی سایت",
+            "Frontend",
+            "Backend",
+            "Python & Flask",
+            "ساخت تجربه کاربری"
+        ];
+
+        let wordIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        function typeEffect() {
+
+            const currentWord = words[wordIndex];
+
+            if (!deleting) {
+                typingElement.textContent =
+                    currentWord.substring(0, charIndex + 1);
+
+                charIndex++;
+
+                if (charIndex === currentWord.length) {
+                    deleting = true;
+                    setTimeout(typeEffect, 1500);
+                    return;
+                }
+
+            } else {
+
+                typingElement.textContent =
+                    currentWord.substring(0, charIndex - 1);
+
+                charIndex--;
+
+                if (charIndex === 0) {
+                    deleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                }
+            }
+
+            setTimeout(typeEffect, deleting ? 55 : 90);
+        }
+
+        typeEffect();
+
+        /* =========================
+           SKILL ANIMATION
+        ========================= */
+
+        const progressBars =
+            document.querySelectorAll(".progress span");
+
+        const observer = new IntersectionObserver(function(entries) {
+
+            entries.forEach(function(entry) {
+
+                if (entry.isIntersecting) {
+
+                    const width =
+                        entry.target.getAttribute("data-width");
+
+                    entry.target.style.width = width;
+
+                    observer.unobserve(entry.target);
+                }
+
+            });
+
+        }, {
+            threshold: 0.4
+        });
+
+        progressBars.forEach(function(bar) {
+            observer.observe(bar);
+        });
+
+        /* =========================
+           NUMBER COUNTER
+        ========================= */
+
+        const counters =
+            document.querySelectorAll(".stat-number");
+
+        const counterObserver =
+            new IntersectionObserver(function(entries) {
+
+                entries.forEach(function(entry) {
+
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    const counter = entry.target;
+                    const target =
+                        Number(counter.getAttribute("data-count"));
+
+                    let current = 0;
+                    const duration = 1200;
+                    const stepTime = 25;
+                    const step = Math.max(
+                        1,
+                        Math.ceil(target / (duration / stepTime))
+                    );
+
+                    const timer = setInterval(function() {
+
+                        current += step;
+
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+
+                        counter.textContent = current;
+
+                    }, stepTime);
+
+                    counterObserver.unobserve(counter);
+                });
+
+            }, {
+                threshold: 0.5
+            });
+
+        counters.forEach(function(counter) {
+            counterObserver.observe(counter);
+        });
+
+        /* =========================
+           SCROLL TO TOP
+        ========================= */
+
+        const scrollTop =
+            document.getElementById("scrollTop");
+
+        window.addEventListener("scroll", function() {
+
+            if (window.scrollY > 500) {
+                scrollTop.classList.add("show");
+            } else {
+                scrollTop.classList.remove("show");
+            }
+
+        });
+
+        scrollTop.addEventListener("click", function() {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+        /* =========================
+           ACTIVE NAV
+        ========================= */
+
+        const sections =
+            document.querySelectorAll("section[id]");
+
+        const navAnchors =
+            document.querySelectorAll(".nav-links a");
+
+        window.addEventListener("scroll", function() {
+
+            let current = "";
+
+            sections.forEach(function(section) {
+
+                const sectionTop =
+                    section.offsetTop - 180;
+
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute("id");
+                }
+
+            });
+
+            navAnchors.forEach(function(link) {
+
+                link.classList.remove("active");
+
+                const href =
+                    link.getAttribute("href");
+
+                if (href === "#" + current) {
+                    link.classList.add("active");
+                }
+
+                if (!current && href === "{{ url_for('home') }}") {
+                    link.classList.add("active");
+                }
+
+            });
+
+        });
+    </script>
+
+</body>
 </html>
+```

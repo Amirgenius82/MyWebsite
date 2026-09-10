@@ -1,134 +1,1010 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>درباره من</title>
+    <title>درباره من | MyWebsite</title>
+    <meta name="description" content="درباره من و مهارت‌های توسعه وب">
 
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
-            font-family: Tahoma, sans-serif;
-            background: #0f172a;
-            color: white;
+        html {
+            scroll-behavior: smooth;
         }
 
-        nav {
-            height: 80px;
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(0,255,255,.08), transparent 25%),
+                radial-gradient(circle at 90% 70%, rgba(160,80,255,.10), transparent 30%),
+                #05070d;
+            color: #fff;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: .23;
+            animation: float 9s ease-in-out infinite alternate;
+        }
+
+        .orb.one {
+            width: 280px;
+            height: 280px;
+            background: #00ffff;
+            left: -90px;
+            top: 15%;
+        }
+
+        .orb.two {
+            width: 340px;
+            height: 340px;
+            background: #8a2be2;
+            right: -110px;
+            bottom: 10%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(45px, -35px);
+            }
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            position: fixed;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(1150px, calc(100% - 32px));
+            min-height: 68px;
+            padding: 10px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 8%;
-            background: #111827;
+            background: rgba(8,12,24,.76);
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 15px 50px rgba(0,0,0,.35);
+            z-index: 1000;
         }
 
-        .logo img {
-            width: 55px;
-            height: 55px;
-            object-fit: contain;
-        }
-
-        nav div:last-child {
+        .brand {
             display: flex;
-            gap: 25px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 17px;
-        }
-
-        nav a:hover {
-            color: #38bdf8;
-        }
-
-        .content {
-            max-width: 800px;
-            margin: 80px auto;
-            padding: 30px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 45px;
-            color: #38bdf8;
-        }
-
-        p {
-            font-size: 20px;
-            line-height: 2;
-            color: #cbd5e1;
-        }
-
-        .back {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 14px 30px;
-            background: #38bdf8;
-            color: #0f172a;
-            text-decoration: none;
-            border-radius: 10px;
+            align-items: center;
+            gap: 12px;
             font-weight: bold;
         }
 
-        footer {
+        .brand img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .brand span {
+            color: #00ffff;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            color: #aeb8c8;
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: .25s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #00ffff;
+            background: rgba(0,255,255,.08);
+        }
+
+        .menu-btn {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: 1px solid rgba(0,255,255,.22);
+            background: rgba(0,255,255,.06);
+            color: #00ffff;
+            cursor: pointer;
+            font-size: 23px;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            max-width: 1150px;
+            min-height: 72vh;
+            margin: auto;
+            padding: 160px 25px 80px;
+            display: grid;
+            grid-template-columns: .85fr 1.15fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .profile-card {
+            position: relative;
+            min-height: 390px;
+            border-radius: 30px;
+            background:
+                radial-gradient(circle at center, rgba(0,255,255,.10), transparent 55%),
+                rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.09);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,.35);
+            animation: appear .9s ease both;
+        }
+
+        .profile-icon {
+            width: 190px;
+            height: 190px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 90px;
+            background: rgba(0,255,255,.06);
+            border: 1px solid rgba(0,255,255,.18);
+            box-shadow:
+                0 0 0 15px rgba(0,255,255,.025),
+                0 0 60px rgba(0,255,255,.12);
+            animation: profileFloat 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes profileFloat {
+            to {
+                transform: translateY(-13px);
+            }
+        }
+
+        .profile-card::before,
+        .profile-card::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 1px solid rgba(0,255,255,.13);
+            border-radius: 50%;
+        }
+
+        .profile-card::before {
+            top: -45px;
+            right: -35px;
+        }
+
+        .profile-card::after {
+            bottom: -45px;
+            left: -35px;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content {
+            animation: appear .9s .15s ease both;
+        }
+
+        .label {
+            display: inline-block;
+            color: #00ffff;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            letter-spacing: .5px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 5vw, 66px);
+            line-height: 1.2;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #00ffff;
+            text-shadow: 0 0 30px rgba(0,255,255,.20);
+        }
+
+        .hero p {
+            color: #9ca8ba;
+            font-size: 17px;
+            max-width: 650px;
+            margin-bottom: 28px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            min-height: 50px;
+            padding: 0 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            font-weight: bold;
+            transition: .3s ease;
+        }
+
+        .primary {
+            color: #041016;
+            background: linear-gradient(135deg,#00ffff,#008cff);
+            box-shadow: 0 10px 35px rgba(0,255,255,.16);
+        }
+
+        .primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 45px rgba(0,255,255,.28);
+        }
+
+        .secondary {
+            border: 1px solid rgba(255,255,255,.11);
+            background: rgba(255,255,255,.035);
+        }
+
+        .secondary:hover {
+            color: #00ffff;
+            border-color: rgba(0,255,255,.30);
+            transform: translateY(-4px);
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 20px 25px 100px;
+        }
+
+        .section-title {
             text-align: center;
-            padding: 20px;
-            background: #111827;
-            color: #94a3b8;
-            margin-top: 100px;
+            margin: 80px 0 45px;
+        }
+
+        .section-title small {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        .section-title h2 {
+            font-size: clamp(30px,4vw,45px);
+            margin: 7px 0;
+        }
+
+        .section-title p {
+            color: #8793a6;
+        }
+
+        /* =========================
+           STORY
+        ========================= */
+
+        .story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .card {
+            padding: 30px;
+            border-radius: 22px;
+            background: rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.08);
+            transition: .3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(0,255,255,.20);
+            box-shadow: 0 20px 55px rgba(0,0,0,.25);
+        }
+
+        .card h3 {
+            font-size: 21px;
+            margin-bottom: 13px;
+        }
+
+        .card p {
+            color: #96a1b3;
+        }
+
+        /* =========================
+           TECHNOLOGIES
+        ========================= */
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 17px;
+        }
+
+        .tech {
+            text-align: center;
+            padding: 28px 15px;
+        }
+
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 17px;
+            background: rgba(0,255,255,.06);
+            border: 1px solid rgba(0,255,255,.13);
+            font-size: 27px;
+        }
+
+        .tech h3 {
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+        .tech p {
+            color: #7e8a9d;
+            font-size: 12px;
+        }
+
+        /* =========================
+           TIMELINE
+        ========================= */
+
+        .timeline {
+            position: relative;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 20px;
+            width: 2px;
+            background: linear-gradient(
+                #00ffff,
+                rgba(0,255,255,.05)
+            );
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-right: 65px;
+            margin-bottom: 25px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            right: 10px;
+            top: 28px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #00ffff;
+            box-shadow: 0 0 22px rgba(0,255,255,.5);
+            border: 5px solid #071019;
+        }
+
+        .timeline-item h3 {
+            margin-bottom: 6px;
+        }
+
+        .timeline-item small {
+            color: #00ffff;
+        }
+
+        .timeline-item p {
+            color: #8c98aa;
+            margin-top: 8px;
+        }
+
+        /* =========================
+           VALUES
+        ========================= */
+
+        .values {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 18px;
+        }
+
+        .value {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .value-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .value h3 {
+            margin-bottom: 7px;
+        }
+
+        .value p {
+            color: #8793a6;
+            font-size: 14px;
+        }
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta {
+            margin-top: 80px;
+            padding: 70px 25px;
+            text-align: center;
+            border-radius: 30px;
+            background:
+                radial-gradient(circle at center, rgba(0,255,255,.11), transparent 55%),
+                rgba(255,255,255,.035);
+            border: 1px solid rgba(0,255,255,.12);
+        }
+
+        .cta h2 {
+            font-size: clamp(30px,4vw,46px);
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            max-width: 650px;
+            margin: 0 auto 25px;
+            color: #929daf;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid rgba(255,255,255,.07);
+            padding: 35px 20px;
+            text-align: center;
+            color: #687487;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: #00ffff;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 135px;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .profile-card {
+                min-height: 330px;
+            }
+
+            .story {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .values {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                top: 10px;
+                width: calc(100% - 20px);
+            }
+
+            .nav-links {
+                position: absolute;
+                top: calc(100% + 8px);
+                left: 0;
+                right: 0;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                background: rgba(7,12,24,.97);
+                border: 1px solid rgba(255,255,255,.09);
+                border-radius: 17px;
+                backdrop-filter: blur(20px);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-8px);
+                transition: .25s ease;
+            }
+
+            .nav-links.show {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .nav-links a {
+                text-align: center;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .container {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .profile-icon {
+                width: 150px;
+                height: 150px;
+                font-size: 70px;
+            }
+
+            .tech-grid {
+                gap: 12px;
+            }
+
+            .card {
+                padding: 24px;
+            }
+
+            .timeline::before {
+                right: 15px;
+            }
+
+            .timeline-item {
+                padding-right: 48px;
+            }
+
+            .timeline-dot {
+                right: 5px;
+            }
+        }
+
+        @media (max-width: 420px) {
+
+            .brand span {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .buttons .btn {
+                width: 100%;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <nav>
+    <div class="background">
+        <div class="orb one"></div>
+        <div class="orb two"></div>
+    </div>
 
-        <div class="logo">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="{{ url_for('home') }}" class="brand">
+            <img
+                src="{{ url_for('static', filename='images/logo.png') }}"
+                alt="MyWebsite"
+            >
+            <span>MyWebsite</span>
+        </a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="{{ url_for('home') }}">خانه</a>
+            <a href="{{ url_for('about') }}" class="active">درباره من</a>
+            <a href="{{ url_for('home') }}#skills">مهارت‌ها</a>
+            <a href="{{ url_for('home') }}#projects">پروژه‌ها</a>
+            <a href="{{ url_for('contact') }}">تماس</a>
+            <a href="{{ url_for('login') }}">ورود مدیر</a>
         </div>
 
-        <div>
-            <a href="/">خانه</a>
-            <a href="/about">درباره من</a>
-            <a href="/contact">تماس با من</a>
-        </div>
+        <button class="menu-btn" id="menuBtn">
+            ☰
+        </button>
 
     </nav>
 
+    <!-- HERO -->
 
-    <div class="content">
+    <section class="hero">
 
-        <h1>درباره من 👋</h1>
+        <div class="profile-card">
+            <div class="profile-icon">
+                👨‍💻
+            </div>
+        </div>
 
-        <p>
-            سلام! من تازه برنامه‌نویسی رو شروع کردم
-            و این اولین سایت منه که با Python و Flask ساختم.
-        </p>
+        <div class="hero-content">
 
-        <p>
-            قراره این سایت رو کم‌کم بزرگ‌تر و حرفه‌ای‌تر کنم. 🚀
-        </p>
+            <span class="label">ABOUT ME</span>
 
-        <a class="back" href="/">
-            🏠 برگشت به صفحه اصلی
-        </a>
+            <h1>
+                درباره
+                <span>من</span>
+            </h1>
 
-    </div>
+            <p>
+                من به طراحی و توسعه وب‌سایت‌های مدرن و کاربردی
+                علاقه‌مندم. هدفم این است که ایده‌ها را به تجربه‌های
+                دیجیتال زیبا، سریع و قابل استفاده تبدیل کنم.
+            </p>
 
+            <div class="buttons">
+
+                <a
+                    href="{{ url_for('contact') }}"
+                    class="btn primary"
+                >
+                    شروع همکاری
+                </a>
+
+                <a
+                    href="{{ url_for('home') }}"
+                    class="btn secondary"
+                >
+                    بازگشت به خانه
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <main class="container">
+
+        <!-- STORY -->
+
+        <div class="section-title">
+            <small>MY STORY</small>
+            <h2>داستان این پروژه</h2>
+            <p>
+                این سایت فقط یک صفحه ساده نیست؛ یک پروژه واقعی برای
+                ترکیب Frontend و Backend است.
+            </p>
+        </div>
+
+        <div class="story">
+
+            <div class="card">
+                <h3>💡 از ایده تا اجرا</h3>
+
+                <p>
+                    این پروژه با هدف ساخت یک وب‌سایت شخصی حرفه‌ای
+                    شروع شد؛ جایی که طراحی، برنامه‌نویسی و مدیریت
+                    اطلاعات در کنار هم قرار بگیرند.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>⚙️ بخش فنی</h3>
+
+                <p>
+                    بخش ظاهری سایت با HTML و CSS و JavaScript ساخته
+                    شده و Backend با Python و Flask مدیریت می‌شود.
+                    پیام‌های فرم تماس نیز در SQLite ذخیره می‌شوند.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- TECHNOLOGIES -->
+
+        <div class="section-title">
+            <small>TECHNOLOGIES</small>
+            <h2>تکنولوژی‌ها</h2>
+            <p>
+                ابزارهای اصلی استفاده‌شده در پروژه
+            </p>
+        </div>
+
+        <div class="tech-grid">
+
+            <div class="card tech">
+                <div class="tech-icon">🌐</div>
+                <h3>HTML5</h3>
+                <p>ساختار و محتوای صفحات</p>
+            </div>
+
+            <div class="card tech">
+                <div class="tech-icon">🎨</div>
+                <h3>CSS3</h3>
+                <p>طراحی و Responsive</p>
+            </div>
+
+            <div class="card tech">
+                <div class="tech-icon">⚡</div>
+                <h3>JavaScript</h3>
+                <p>تعامل و انیمیشن</p>
+            </div>
+
+            <div class="card tech">
+                <div class="tech-icon">🐍</div>
+                <h3>Python / Flask</h3>
+                <p>Backend و Routing</p>
+            </div>
+
+        </div>
+
+        <!-- TIMELINE -->
+
+        <div class="section-title">
+            <small>MY JOURNEY</small>
+            <h2>مسیر پروژه</h2>
+            <p>
+                مراحل اصلی ساخت این وب‌سایت
+            </p>
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="card">
+                    <small>مرحله ۱</small>
+                    <h3>طراحی اولیه</h3>
+
+                    <p>
+                        ساخت ساختار اصلی صفحات و انتخاب سبک
+                        Dark / Neon برای ظاهر سایت.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="card">
+                    <small>مرحله ۲</small>
+                    <h3>Frontend</h3>
+
+                    <p>
+                        ساخت صفحات، Navigation، کارت‌ها،
+                        Responsive Design و انیمیشن‌ها.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="card">
+                    <small>مرحله ۳</small>
+                    <h3>Backend</h3>
+
+                    <p>
+                        اتصال صفحات به Flask، ساخت فرم تماس،
+                        Login و سیستم مدیریت پیام‌ها.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="card">
+                    <small>مرحله ۴</small>
+                    <h3>نسخه حرفه‌ای</h3>
+
+                    <p>
+                        بهبود ظاهر، تجربه کاربری، انیمیشن‌ها
+                        و آماده‌سازی برای ارائه نهایی.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- VALUES -->
+
+        <div class="section-title">
+            <small>MY VALUES</small>
+            <h2>چیزی که برای من مهم است</h2>
+        </div>
+
+        <div class="values">
+
+            <div class="card value">
+                <div class="value-icon">🎯</div>
+                <h3>کیفیت</h3>
+                <p>
+                    جزئیات کوچک می‌توانند تفاوت بزرگی ایجاد کنند.
+                </p>
+            </div>
+
+            <div class="card value">
+                <div class="value-icon">⚡</div>
+                <h3>سرعت</h3>
+                <p>
+                    سایت باید سریع، روان و بدون پیچیدگی اضافی باشد.
+                </p>
+            </div>
+
+            <div class="card value">
+                <div class="value-icon">✨</div>
+                <h3>تجربه کاربری</h3>
+                <p>
+                    کاربر باید بتواند بدون سردرگمی با سایت کار کند.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- CTA -->
+
+        <div class="cta">
+
+            <h2>یک پروژه در ذهن داری؟ 🚀</h2>
+
+            <p>
+                اگر ایده‌ای داری، می‌توانیم آن را به یک وب‌سایت
+                واقعی و حرفه‌ای تبدیل کنیم.
+            </p>
+
+            <a
+                href="{{ url_for('contact') }}"
+                class="btn primary"
+            >
+                با من تماس بگیر
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
 
     <footer>
-        ساخته شده با ❤️ و Python
+        © 2026 <strong>MyWebsite</strong> — ساخته شده با ❤️ و کدنویسی
     </footer>
 
-</body>
+    <script>
 
+        const menuBtn =
+            document.getElementById("menuBtn");
+
+        const navLinks =
+            document.getElementById("navLinks");
+
+        menuBtn.addEventListener("click", function () {
+
+            navLinks.classList.toggle("show");
+
+        });
+
+        document
+            .querySelectorAll(".nav-links a")
+            .forEach(function(link) {
+
+                link.addEventListener("click", function() {
+
+                    navLinks.classList.remove("show");
+
+                });
+
+            });
+
+    </script>
+
+</body>
 </html>
+```

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>پیام ارسال شد | MyWebsite</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(0,255,208,0.09), transparent 30%),
+                radial-gradient(circle at 80% 75%, rgba(110,80,255,0.10), transparent 32%),
+                #050816;
+            color: #fff;
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px 15px;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+
+            width: 500px;
+            height: 500px;
+
+            border-radius: 50%;
+
+            background: rgba(0,255,208,0.05);
+
+            filter: blur(100px);
+
+            top: -200px;
+            right: -160px;
+
+            pointer-events: none;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+
+            width: 450px;
+            height: 450px;
+
+            border-radius: 50%;
+
+            background: rgba(110,80,255,0.06);
+
+            filter: blur(100px);
+
+            bottom: -180px;
+            left: -140px;
+
+            pointer-events: none;
+        }
+
+        /* ================= BACK ================= */
+
+        .back-home {
+            position: fixed;
+
+            top: 22px;
+            right: 25px;
+
+            text-decoration: none;
+
+            color: #9ba5bd;
+
+            font-size: 13px;
+
+            padding: 10px 14px;
+
+            border-radius: 12px;
+
+            background: rgba(10,15,32,0.65);
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            backdrop-filter: blur(14px);
+
+            transition: 0.3s ease;
+        }
+
+        .back-home:hover {
+            color: #00ffd0;
+
+            border-color: rgba(0,255,208,0.2);
+
+            transform: translateX(-3px);
+        }
+
+        /* ================= CARD ================= */
+
+        .success-card {
+            position: relative;
+
+            width: min(570px, 100%);
+
+            padding: 55px 42px;
+
+            text-align: center;
+
+            border-radius: 30px;
+
+            background: rgba(11,17,37,0.80);
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 35px 100px rgba(0,0,0,0.40),
+                0 0 70px rgba(0,255,208,0.04);
+        }
+
+        /* ================= CHECK ================= */
+
+        .check-circle {
+            width: 92px;
+            height: 92px;
+
+            margin: 0 auto 25px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            background: rgba(0,255,208,0.08);
+
+            border: 1px solid rgba(0,255,208,0.20);
+
+            box-shadow:
+                0 0 0 10px rgba(0,255,208,0.025),
+                0 0 45px rgba(0,255,208,0.12);
+
+            animation: appear 0.7s ease;
+        }
+
+        .check {
+            width: 46px;
+            height: 24px;
+
+            border-left: 5px solid #00ffd0;
+            border-bottom: 5px solid #00ffd0;
+
+            transform: rotate(-45deg) translateY(-3px);
+
+            filter: drop-shadow(0 0 10px rgba(0,255,208,0.5));
+
+            animation: check 0.8s ease 0.2s both;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: scale(0.6);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes check {
+            from {
+                opacity: 0;
+                clip-path: inset(0 100% 0 0);
+            }
+
+            to {
+                opacity: 1;
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        /* ================= TEXT ================= */
+
+        .label {
+            color: #00ffd0;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 13px;
+        }
+
+        h1 {
+            font-size: clamp(30px, 6vw, 44px);
+
+            line-height: 1.4;
+
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #858fa8;
+
+            font-size: 14px;
+
+            line-height: 2;
+
+            max-width: 420px;
+
+            margin: 0 auto;
+        }
+
+        /* ================= STATUS ================= */
+
+        .status-box {
+            margin: 30px auto;
+
+            padding: 15px 18px;
+
+            max-width: 420px;
+
+            border-radius: 15px;
+
+            background: rgba(0,255,208,0.045);
+
+            border: 1px solid rgba(0,255,208,0.12);
+
+            color: #9da7bc;
+
+            font-size: 12px;
+
+            line-height: 1.9;
+        }
+
+        .status-box strong {
+            color: #00ffd0;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+
+            max-width: 420px;
+
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-height: 50px;
+
+            border-radius: 14px;
+
+            text-decoration: none;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            transition: 0.3s ease;
+        }
+
+        .btn-primary {
+            color: #03100e;
+
+            font-weight: bold;
+
+            background: linear-gradient(
+                135deg,
+                #00ffd0,
+                #00bda3
+            );
+
+            box-shadow:
+                0 12px 35px rgba(0,255,208,0.12);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 18px 45px rgba(0,255,208,0.22);
+        }
+
+        .btn-secondary {
+            color: #b7bfd0;
+
+            background: rgba(255,255,255,0.035);
+
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .btn-secondary:hover {
+            color: #00ffd0;
+
+            border-color: rgba(0,255,208,0.20);
+
+            background: rgba(0,255,208,0.045);
+
+            transform: translateY(-3px);
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            margin-top: 27px;
+
+            color: #515b73;
+
+            font-size: 10px;
+        }
+
+        .footer strong {
+            color: #00ffd0;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 520px) {
+
+            body {
+                padding: 20px 12px;
+                overflow-y: auto;
+            }
+
+            .back-home {
+                top: 12px;
+                right: 12px;
+            }
+
+            .success-card {
+                padding: 42px 22px;
+                border-radius: 23px;
+            }
+
+            .check-circle {
+                width: 78px;
+                height: 78px;
+            }
+
+            .check {
+                width: 38px;
+                height: 21px;
+            }
+
+            .buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .description {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BACK -->
+
+    <a
+        href="{{ url_for('home') }}"
+        class="back-home"
+    >
+        ← بازگشت به خانه
+    </a>
+
+
+    <!-- SUCCESS CARD -->
+
+    <main class="success-card">
+
+        <div class="check-circle">
+            <div class="check"></div>
+        </div>
+
+        <div class="label">
+            MESSAGE SENT SUCCESSFULLY
+        </div>
+
+        <h1>
+            پیام با موفقیت ارسال شد! 🎉
+        </h1>
+
+        <p class="description">
+            ممنون که پیام خودت را ارسال کردی.
+            اطلاعات شما با موفقیت ثبت شد و در اولین فرصت بررسی خواهد شد.
+        </p>
+
+
+        <div class="status-box">
+
+            <strong>✓ ثبت موفق</strong>
+
+            <br>
+
+            پیام شما در سیستم ثبت شده است.
+
+        </div>
+
+
+        <div class="buttons">
+
+            <a
+                href="{{ url_for('home') }}"
+                class="btn btn-primary"
+            >
+                🏠 بازگشت به خانه
+            </a>
+
+            <a
+                href="{{ url_for('contact') }}"
+                class="btn btn-secondary"
+            >
+                ✉️ ارسال پیام دیگر
+            </a>
+
+        </div>
+
+
+        <div class="footer">
+            © 2026 <strong>MyWebsite</strong> — ساخته شده با Python & Flask
+        </div>
+
+    </main>
+
+</body>
+
+</html>

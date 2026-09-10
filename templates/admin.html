@@ -3,98 +3,807 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>پنل مدیریت</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>پنل مدیریت | MyWebsite</title>
 
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: Tahoma, sans-serif;
-            background: #0f172a;
-            color: white;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(0,255,208,0.07), transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(110,80,255,0.08), transparent 30%),
+                #050816;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+
+            width: min(1200px, calc(100% - 30px));
+            margin: 15px auto 0;
+
+            padding: 12px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(8,13,30,0.82);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 19px;
+
+            backdrop-filter: blur(18px);
+
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .brand img {
+            width: 41px;
+            height: 41px;
+            object-fit: contain;
+            border-radius: 11px;
+        }
+
+        .admin-badge {
+            color: #00ffd0;
+            font-size: 10px;
+            padding: 5px 9px;
+            border-radius: 999px;
+            background: rgba(0,255,208,0.07);
+            border: 1px solid rgba(0,255,208,0.14);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-actions a {
+            text-decoration: none;
+            color: #aeb7ca;
+
+            padding: 10px 13px;
+            border-radius: 11px;
+
+            font-size: 12px;
+
+            transition: 0.3s ease;
+        }
+
+        .nav-actions a:hover {
+            color: #00ffd0;
+            background: rgba(0,255,208,0.07);
+        }
+
+        .logout {
+            border: 1px solid rgba(255,90,120,0.16);
+        }
+
+        .logout:hover {
+            color: #ff7890 !important;
+            background: rgba(255,70,100,0.07) !important;
+        }
+
+        /* ================= MAIN ================= */
 
         .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 60px auto;
+            width: min(1200px, calc(100% - 30px));
+            margin: 0 auto;
+            padding: 65px 0 80px;
         }
 
-        h1 {
-            text-align: center;
-            color: #38bdf8;
-            margin-bottom: 40px;
+        .page-heading {
+            margin-bottom: 32px;
         }
 
-        .message {
-            background: #111827;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-        }
-
-        .message h3 {
-            margin-top: 0;
-            color: #38bdf8;
-        }
-
-        .message p {
-            color: #cbd5e1;
-            line-height: 1.8;
-        }
-
-        .back {
-            display: block;
-            width: fit-content;
-            margin: 30px auto;
-            padding: 12px 25px;
-            background: #38bdf8;
-            color: #0f172a;
-            text-decoration: none;
-            border-radius: 8px;
+        .eyebrow {
+            color: #00ffd0;
+            font-size: 12px;
             font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 11px;
+        }
+
+        .page-heading h1 {
+            font-size: clamp(30px, 5vw, 48px);
+            margin-bottom: 10px;
+        }
+
+        .page-heading p {
+            color: #7f89a2;
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+
+            padding: 24px;
+
+            border-radius: 20px;
+
+            background: rgba(12,18,38,0.72);
+            border: 1px solid rgba(255,255,255,0.07);
+
+            backdrop-filter: blur(15px);
+
+            transition: 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0,255,208,0.16);
+        }
+
+        .stat-card::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(0,255,208,0.05);
+            filter: blur(30px);
+            top: -50px;
+            left: -40px;
+        }
+
+        .stat-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 17px;
+        }
+
+        .stat-icon {
+            width: 43px;
+            height: 43px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 13px;
+
+            background: rgba(0,255,208,0.07);
+            border: 1px solid rgba(0,255,208,0.12);
+
+            font-size: 19px;
+        }
+
+        .stat-title {
+            color: #747e96;
+            font-size: 11px;
+        }
+
+        .stat-number {
+            font-size: 31px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .stat-status {
+            color: #00ffd0;
+            font-size: 11px;
+        }
+
+        /* ================= MESSAGE HEADER ================= */
+
+        .messages-panel {
+            background: rgba(12,18,38,0.72);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 24px;
+
+            backdrop-filter: blur(16px);
+
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 22px 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .panel-title h2 {
+            font-size: 19px;
+            margin-bottom: 6px;
+        }
+
+        .panel-title p {
+            color: #68728a;
+            font-size: 11px;
+        }
+
+        .message-count {
+            padding: 8px 12px;
+            border-radius: 10px;
+
+            color: #00ffd0;
+            background: rgba(0,255,208,0.06);
+            border: 1px solid rgba(0,255,208,0.12);
+
+            font-size: 11px;
+        }
+
+        /* ================= MESSAGES ================= */
+
+        .messages {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .message-card {
+            padding: 20px;
+
+            border-radius: 18px;
+
+            background: rgba(3,7,20,0.48);
+            border: 1px solid rgba(255,255,255,0.055);
+
+            transition: 0.3s ease;
+        }
+
+        .message-card:hover {
+            border-color: rgba(0,255,208,0.15);
+            transform: translateY(-2px);
+        }
+
+        .message-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 16px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 43px;
+            height: 43px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 13px;
+
+            background: linear-gradient(
+                135deg,
+                rgba(0,255,208,0.13),
+                rgba(110,80,255,0.13)
+            );
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            font-size: 17px;
+        }
+
+        .user-name {
+            color: #edf1fa;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .user-email {
+            color: #68728b;
+            font-size: 11px;
+            direction: ltr;
+            text-align: right;
+        }
+
+        .message-id {
+            color: #59627a;
+            font-size: 10px;
+            padding: 6px 9px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .message-body {
+            padding: 16px;
+
+            background: rgba(255,255,255,0.025);
+
+            border-radius: 13px;
+
+            color: #aeb7ca;
+
+            line-height: 2;
+            font-size: 12px;
+
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .message-bottom {
+            margin-top: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 12px;
+        }
+
+        .date {
+            color: #59627a;
+            font-size: 10px;
+        }
+
+        .delete-btn {
+            border: 1px solid rgba(255,70,100,0.15);
+
+            background: rgba(255,70,100,0.055);
+
+            color: #ff758d;
+
+            padding: 8px 12px;
+
+            border-radius: 10px;
+
+            font-family: inherit;
+            font-size: 11px;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background: rgba(255,70,100,0.12);
+            border-color: rgba(255,70,100,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+            padding: 65px 25px;
+            text-align: center;
+        }
+
+        .empty-icon {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 18px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 21px;
+
+            background: rgba(0,255,208,0.06);
+            border: 1px solid rgba(0,255,208,0.12);
+
+            font-size: 28px;
+        }
+
+        .empty h3 {
+            font-size: 18px;
+            margin-bottom: 9px;
+        }
+
+        .empty p {
+            color: #68728a;
+            font-size: 12px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            color: #4f596f;
+            font-size: 11px;
+            padding: 25px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer strong {
+            color: #00ffd0;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding-top: 45px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                width: calc(100% - 20px);
+                margin-top: 10px;
+                padding: 10px 12px;
+            }
+
+            .nav-actions a {
+                padding: 8px;
+                font-size: 11px;
+            }
+
+            .nav-actions a:not(.logout) {
+                display: none;
+            }
+
+            .container {
+                width: calc(100% - 20px);
+                padding-top: 38px;
+            }
+
+            .page-heading {
+                margin-bottom: 25px;
+            }
+
+            .panel-header {
+                padding: 18px;
+            }
+
+            .messages {
+                padding: 12px;
+            }
+
+            .message-card {
+                padding: 15px;
+            }
+
+            .message-top {
+                align-items: flex-start;
+            }
+
+            .message-bottom {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .delete-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 400px) {
+
+            .brand {
+                font-size: 14px;
+            }
+
+            .admin-badge {
+                display: none;
+            }
+
+            .page-heading h1 {
+                font-size: 29px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
+    <!-- NAVBAR -->
 
-        <h1>📨 پیام‌های دریافتی</h1>
+    <nav class="navbar">
 
-        {% for message in messages %}
+        <a href="{{ url_for('home') }}" class="brand">
 
-        <div class="message">
+            <img
+                src="{{ url_for('static', filename='images/logo.png') }}"
+                alt="MyWebsite Logo"
+            >
 
-            <h3>{{ message[1] }}</h3>
+            <span>MyWebsite</span>
 
-            <p>
-                📧 {{ message[2] }}
-            </p>
+            <span class="admin-badge">
+                ADMIN
+            </span>
 
-            <p>
-                💬 {{ message[3] }}
-            </p>
-
-        </div>
-
-        {% else %}
-
-        <div class="message">
-            <p>هنوز هیچ پیامی دریافت نشده است.</p>
-        </div>
-
-        {% endfor %}
-
-        <a class="back" href="/">
-            🏠 برگشت به سایت
         </a>
 
-<a class="logout" href="/logout">
-    🚪 خروج از حساب
-</a>
+        <div class="nav-actions">
 
-    </div>
+            <a href="{{ url_for('home') }}">
+                🏠 خانه
+            </a>
+
+            <a href="{{ url_for('contact') }}">
+                ✉️ تماس
+            </a>
+
+            <a href="{{ url_for('logout') }}" class="logout">
+                خروج ↪
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <section class="page-heading">
+
+            <div class="eyebrow">
+                MYWEBSITE / ADMIN PANEL
+            </div>
+
+            <h1>
+                داشبورد مدیریت 👋
+            </h1>
+
+            <p>
+                اینجا می‌توانی پیام‌های ارسال‌شده توسط کاربران را مشاهده و مدیریت کنی.
+            </p>
+
+        </section>
+
+
+        <!-- STATS -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-title">
+                        مجموع پیام‌ها
+                    </div>
+
+                    <div class="stat-icon">
+                        💬
+                    </div>
+
+                </div>
+
+                <div class="stat-number">
+                    {{ messages|length }}
+                </div>
+
+                <div class="stat-status">
+                    پیام ثبت شده
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-title">
+                        کاربران
+                    </div>
+
+                    <div class="stat-icon">
+                        👥
+                    </div>
+
+                </div>
+
+                <div class="stat-number">
+                    {{ messages|length }}
+                </div>
+
+                <div class="stat-status">
+                    درخواست دریافت شده
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-title">
+                        وضعیت سیستم
+                    </div>
+
+                    <div class="stat-icon">
+                        ⚡
+                    </div>
+
+                </div>
+
+                <div class="stat-number">
+                    فعال
+                </div>
+
+                <div class="stat-status">
+                    ● سیستم آنلاین است
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MESSAGES -->
+
+        <section class="messages-panel">
+
+            <div class="panel-header">
+
+                <div class="panel-title">
+
+                    <h2>
+                        پیام‌های کاربران
+                    </h2>
+
+                    <p>
+                        آخرین پیام‌ها در این بخش نمایش داده می‌شوند.
+                    </p>
+
+                </div>
+
+                <div class="message-count">
+                    {{ messages|length }} پیام
+                </div>
+
+            </div>
+
+
+            {% if messages %}
+
+                <div class="messages">
+
+                    {% for message in messages %}
+
+                        <article class="message-card">
+
+                            <div class="message-top">
+
+                                <div class="user-info">
+
+                                    <div class="avatar">
+                                        👤
+                                    </div>
+
+                                    <div>
+
+                                        <div class="user-name">
+                                            {{ message[1] }}
+                                        </div>
+
+                                        <div class="user-email">
+                                            {{ message[2] }}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="message-id">
+                                    #{{ message[0] }}
+                                </div>
+
+                            </div>
+
+
+                            <div class="message-body">
+                                {{ message[3] }}
+                            </div>
+
+
+                            <div class="message-bottom">
+
+                                <div class="date">
+
+                                    {% if message[4] %}
+                                        🕐 {{ message[4] }}
+                                    {% else %}
+                                        🕐 تاریخ ثبت نشده
+                                    {% endif %}
+
+                                </div>
+
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for('delete_message', message_id=message[0]) }}"
+                                    onsubmit="return confirm('آیا مطمئن هستید که می‌خواهید این پیام را حذف کنید؟');"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="delete-btn"
+                                    >
+                                        🗑 حذف پیام
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        📭
+                    </div>
+
+                    <h3>
+                        هنوز پیامی دریافت نشده
+                    </h3>
+
+                    <p>
+                        وقتی کاربری از صفحه تماس پیام ارسال کند، اینجا نمایش داده می‌شود.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+        © 2026 <strong>MyWebsite</strong> — پنل مدیریت
+    </footer>
 
 </body>
 
